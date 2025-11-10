@@ -1,30 +1,31 @@
 import { configureStore } from '@reduxjs/toolkit'
 import search from './searchSlice'
 import detail from './detailSlice'
-import favorites, { favoritesInitialState } from './favoritesSlice'
+import favorites, { favoritesInitialState, type FavoritesState } from './favoritesSlice'
 import { loadFavoritesState, saveFavoritesState } from './persistence'
 
-const baseFavorites = loadFavoritesState() ?? favoritesInitialState
-const preloadedFavorites = {
-  ids: [...baseFavorites.ids],
-  entities: { ...baseFavorites.entities }
+function sanitize(v?: FavoritesState): FavoritesState {
+  if (!v) return { ids: [] }
+  const ids = Array.from(new Set((v.ids || []).map(Number).filter(Number.isFinite)))
+  return { ids }
 }
+
+const preloadedFavorites = sanitize(loadFavoritesState() ?? favoritesInitialState)
 
 export const store = configureStore({
   reducer: { search, detail, favorites },
-  preloadedState: { favorites: preloadedFavorites }
+  preloadedState: { favorites: preloadedFavorites },
+  middleware: (getDefault) => getDefault({ serializableCheck: false }),
 })
 
-if (typeof window !== 'undefined') {
-  let prev = store.getState().favorites
-  store.subscribe(() => {
-    const next = store.getState().favorites
-    if (next !== prev) {
-      prev = next
-      saveFavoritesState(next)
-    }
-  })
-}
+// throttle persistence
+let last = 0
+store.subscribe(() => {
+  const now = typeof performance !== 'undefined' ? performance.now() : Date.now()
+  if (now - last < 100) return
+  last = now
+  saveFavoritesState(sanitize(store.getState().favorites))
+})
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
