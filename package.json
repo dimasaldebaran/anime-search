@@ -1,9 +1,26 @@
 {
+  "name": "anime-search",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",              // <— change to this
+    "build": "vite build",
     "typecheck": "tsc -b --pretty false",
     "preview": "vite preview --port 4000"
   },
-  "engines": { "node": "20.x" }         // optional but recommended
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2",
+    "@reduxjs/toolkit": "^2.2.3",
+    "react-redux": "^9.1.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vite": "^5.4.0"
+  },
+  "engines": {
+    "node": "20.x"
+  }
 }
