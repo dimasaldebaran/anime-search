@@ -11,7 +11,7 @@ const preloadedFavorites = {
 }
 
 export const store = configureStore({
-  reducer: { search, detail, favorites }
+  reducer: { search, detail, favorites },
   preloadedState: { favorites: preloadedFavorites }
 })
 

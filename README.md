@@ -17,12 +17,13 @@ Meets the take-home spec: **instant debounced search with cancellation**, **serv
 ---
 
 ## Features
-- 🔎 **Instant search** (debounce 250ms) + **cancel in-flight requests** to avoid race conditions.
-- 📄 **Server-side pagination** (Prev/Next) via Jikan’s `page`, `has_next_page`, `last_visible_page`.
-- 🧭 Two routes: `/` (Search), `/anime/:id` (Detail).
-- 📦 Detail data cached by ID (fast revisit).
-- 🧱 Skeleton loaders, empty state, and error messages.
-- 📱 Responsive layout; accessible controls.
+- **Instant search** (debounce 250ms) + **cancel in-flight requests** to avoid race conditions.
+- **Server-side pagination** (Prev/Next) via Jikan’s `page`, `has_next_page`, `last_visible_page`.
+- Two routes: `/` (Search), `/anime/:id` (Detail).
+- Detail data cached by ID (fast revisit).
+- Skeleton loaders, empty state, and error messages.
+- Responsive layout; accessible controls.
+- Adding saving features. 
 
 
 ---
