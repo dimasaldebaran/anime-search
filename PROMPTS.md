@@ -10,9 +10,12 @@ This file documents where and how AI assistance was used.
 - Write boilerplate for slices, hooks, and pages.
 - Draft README and this PROMPTS.md.
 
-## Prompts (Summary)
-1. *"Create a React + TypeScript Vite SPA that meets this spec (Redux, react-router, debounced instant search with cancelation, server-side pagination using Jikan API, no env vars, dev on port 4000). Produce minimal but production-quality code."*
-2. *"Add Search and Detail pages, Redux Toolkit slices, and AbortController-based cancellation. Use a simple responsive UI and skeleton loaders."*
+## Prompts
+1. Search slice with server pagination 
+“Using Redux Toolkit, implement `searchSlice` managing `query`, `page`, `items`, `lastVisiblePage`, `hasNextPage`, `status`, `error`. Add `fetchAnime` thunk that reads query/page from state and calls the Jikan client.”
+2. Jikan API  
+“Create `api/jikan.ts` with TypeScript types for Jikan v4 search and detail responses. Export `searchAnime(query, page, signal?)` and `getAnimeById(id, signal?)`. Throw descriptive errors on non-2xx.”
+3. 
 
 ## Human Oversight
 - Verified API endpoints and response fields.
